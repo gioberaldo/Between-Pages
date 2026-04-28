@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Between Pages | Books Checklist</title>
+    <link rel="icon" href="./assets/imgs/logo1.png">
+    <link rel="stylesheet" href="./css/checklist.css">
+</head>
+
+<body>
+
+    <img src="./assets/imgs/books-checklist.png" alt="" width="730px" height="120px">
+
+    <div class="lista">
+
+        <fieldset class="container">
+            <legend>Checklist de livros citados em Gilmore Girls</legend><br><br>
+            
+            <div class="livro1">
+
+                <label>
+                    <input type="checkbox" id="harry_potter">  Harry Potter e a Pedra Filosofal – J. K. Rowling
+                </label>
+                <br><br>
+
+            </div>
+
+            <div class="livro2">
+
+                <label>
+                    <input type="checkbox" id="o_grande_gatsby">  O Grande Gatsby – F. Scott Fitzgerald
+                </label>
+                <br><br>
+            </div>
+
+            <div class="livro3">
+
+                <label>
+                    <input type="checkbox" id="alice_wonderland">  Alice no País das Maravilhas – Lewis Carroll
+                </label>
+                <br><br>
+
+            </div>
+
+            <div class="livro4">
+
+                <label>
+                    <input type="checkbox" id="carrie_a_estranha">  Carrie, A Estranha – Stephen King
+                </label>
+                <br><br>
+
+            </div>
+
+            <div class="livro5">
+
+                <label>
+                    <input type="checkbox" id="bruxas_de_salem">  As Bruxas de Salém – Arthur Miller
+                </label>
+                <br><br>
+
+            </div>
+
+            <div class="livro6">
+
+                <label>
+                    <input type="checkbox" id="anna_karenina">  Anna Karenina – Leon Tolstoy
+                </label>
+                <br><br>
+
+            </div>
+
+            <div class="livro7">
+
+                <label>
+                    <input type="checkbox" id="diario_anne_frank">  O Diário de Anne Frank – Anne Frank
+                </label>
+                <br><br>
+            
+            </div>
+
+            <div class="livro8">
+
+                <label>
+                    <input type="checkbox" id="orgulho_e_preconceito">  Orgulho e Preconceito – Jane Austen
+                </label>
+                <br><br>
+
+            </div>
+
+            <div class="livro9">
+
+                <label>
+                    <input type="checkbox" id="violinista_no_Telhado">  Um Violinista no Telhado – Joseph Stein
+                </label>
+                <br><br>
+            
+            </div>
+
+            <div class="livro10">
+
+                <label>
+                    <input type="checkbox" id="a_nascente">  A Nascente – Ayn Rand
+                </label>
+                <br><br>
+
+            </div>
+
+            
+            <button onclick="verDash()">Ver Dashboard</button><br>
+        
+        </fieldset>
+    
+    </div>
+
+     <div class="btn-logout" onclick="limparSessao()">
+                <a href="index.html">
+                    <h3>Sair</h3>
+                </a>
+    </div>
+
+</body>
+
+</html>
+<script>
+
+    function verDash() {
+
+        let checklist = [
+            document.getElementById('harry_potter'),
+            document.getElementById('o_grande_gatsby'),
+            document.getElementById('alice_wonderland'),
+            document.getElementById('carrie_a_estranha'),
+            document.getElementById('bruxas_de_salem'),
+            document.getElementById('anna_karenina'),
+            document.getElementById('diario_anne_frank'),
+            document.getElementById('orgulho_e_preconceito'),
+            document.getElementById('violinista_no_Telhado'),
+            document.getElementById('a_nascente')
+        ];
+
+        let lidos = 0;
+
+        for (let i = 0; i < checklist.length; i++) {
+            if (checklist[i].checked) {
+                lidos++;
+            }
+        }
+
+        let total = checklist.length;
+
+        alert(`você leu ${lidos} de um total de ${total} livros `)
+
+        localStorage.setItem("livrosLidos", lidos);
+        localStorage.setItem("totalLivros", total);
+
+
+        setTimeout(function () {
+            window.location = ".//dashboard.html";
+        }, 1000);
+
+    }
+
+</script>
