@@ -1,11 +1,3 @@
--- Arquivo de apoio, caso você queira criar tabelas como as aqui criadas para a API funcionar.
--- Você precisa executar os comandos no banco de dados para criar as tabelas,
--- ter este arquivo aqui não significa que a tabela em seu BD estará como abaixo!
-
-/*
-comandos para mysql server
-*/
-
 CREATE DATABASE bd_between_pages;
 USE bd_between_pages;
 
@@ -16,6 +8,9 @@ email VARCHAR(45),
 cpf CHAR(11),
 senha VARCHAR(20)
 );
+
+DROP TABLE LivrosLidos;
+DROP TABLE Cadastro;
 
 CREATE TABLE LivrosLidos(
 id INT PRIMARY KEY AUTO_INCREMENT,
