@@ -1,0 +1,87 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+
+.geral {
+    display: flex;
+    background-color: #647ea0;
+}
+
+
+.grafico-container {
+
+    height: 300px;
+    width: 300px;
+    display: flex;
+  justify-content: center;
+  align-items: center;
+
+}
+
+.hello {
+
+    align-self: flex-start;
+    margin-top: 20px;
+    margin-left: 20px;
+    margin-bottom: 10px;
+}
+
+.header-left h3 {
+
+    width: 100%;
+    margin-left: 60px;
+    color: black;
+
+}
+
+.header-left {
+    
+    height: 100vh;
+    width: 20%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-right: 3px solid #32b9cd;
+    background-color:  #feeec6;
+}
+
+.dash {
+    width: 20%;
+    padding: 20px;
+    display: flex;
+    align-self: center;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-left: 30%;
+    border: solid black 2px;
+    border-radius: 20px;
+    background-color: white;
+}
+
+.titulo-grafico {
+    margin-top: 10px;
+    padding-left: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    color: black;
+    font-family: 'Telegraf', sans-serif;
+    font-size: 18px;
+}
+
+
+.fraseGrafico1 {
+    margin-top: 20px;
+    text-align: center;
+    border: solid #feeec6 5px;
+    border-radius: 10px;
+    background-color: #feeec6;
+    
+}
+
+.frase {
+    color: black;
+}
+

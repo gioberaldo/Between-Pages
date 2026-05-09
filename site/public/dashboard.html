@@ -1,22 +1,101 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Between Pages | DASHBOARD</title>
+
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="./css/dashboardBP.css">
 </head>
+
 <body>
-    dashboard em desenvolvimento
 
-    <div>
-        <canvas id="grafico1" style="position: relative; height:40vh; width:40vw"></canvas>
 
+    <div class="geral">
+
+        <div class="header-left">
+
+            
+            <div class="hello">
+                <div class="logo"><span><img src="./assets/imgs/logo2.png" alt="logo" width="240px" height="100px"></span></div>
+                <h3>Olá, <span id="b_usuario">usuário</span>!</h3>
+            </div>
+
+        </div>
+
+   
+
+        <div class="dash">
+
+             <div class="titulo-grafico">
+                    <p>Andamento de leitura</p>
+            </div>
+
+            <div class="grafico-container">
+                <canvas id="grafico1"></canvas>
+
+            </div>
+            
+            
+            <div class="fraseGrafico1">
+                
+                <div id="frase" class="frase"></div>
+                
+            </div>
+            
+        </div>
     </div>
 
-    <div>
-        <canvas id="myChart2" style="position: relative; height:40vh; width:40vw"></canvas>
-
-    </div>
 </body>
+
 </html>
+
+<script>
+
+    b_usuario.innerHTML = sessionStorage.NOME_USUARIO;
+
+
+    window.onload = graficoLidos;
+
+    function graficoLidos() {
+
+        let frase = document.getElementById("frase");
+        let lidos = Number(localStorage.getItem("livrosLidos"));
+        let total = Number(localStorage.getItem("totalLivros"));
+        let naoLidos = total - lidos;
+
+        let dados = {
+            labels: ["Lidos", "Não lidos"],
+            datasets: [{
+                label: "Status de leitura",
+                data: [lidos, naoLidos],
+                backgroundColor: ["#647ea0", "#737373"]
+            }]
+        };
+
+        const config = {
+            type: "doughnut",
+            data: dados
+        };
+
+        let grafico = new Chart(
+            document.getElementById("grafico1"),
+            config
+        );
+
+        if (naoLidos <= 2) {
+            frase.innerHTML = `Você está virando quase uma sósia da Rory Gilmore`;
+        }else if (naoLidos <= 5) {
+             frase.innerHTML = `Continue assim, sua evolução na leitura merece palmas!`;
+            
+        }else if (naoLidos <= 9) {
+             frase.innerHTML = `Você está no caminho certo, o importante não é quantidade, é começar!`;
+        }
+
+        console.log(lidos, total, naoLidos);
+    }
+
+
+</script>
