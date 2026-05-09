@@ -124,10 +124,23 @@
 
 </html>
 <script>
+    function Genero(listaGeneros) {
+
+        let contador = 0;
+
+        for (let i = 0; i < listaGeneros.length; i++) {
+            if (listaGeneros[i].checked) {
+                contador ++
+            }
+            
+        }
+        return contador;
+    }
+
 
     function verDash() {
 
-        console.log("clicou");
+    
 
         let checklist = [
             document.getElementById('harry_potter'),
@@ -142,6 +155,35 @@
             document.getElementById('a_nascente')
 
             
+        ];
+
+        let fantasia = [
+            document.getElementById('harry_potter'),
+            document.getElementById('alice_wonderland'),
+        ];
+
+        let romance = [
+            document.getElementById('o_grande_gatsby'),
+            document.getElementById('anna_karenina'),
+            document.getElementById('orgulho_e_preconceito'),
+            document.getElementById('a_nascente')
+
+        ];
+
+        let biografia = [
+            document.getElementById('diario_anne_frank'),
+        ];
+
+        let terror = [
+            document.getElementById('carrie_a_estranha'),
+        ];
+
+        let drama = [
+            document.getElementById('bruxas_de_salem'),
+        ];
+
+        let musical = [
+            document.getElementById('violinista_no_Telhado'),
         ];
 
         let lidos = 0;
@@ -159,6 +201,21 @@
         }
 
         let total = checklist.length;
+
+        let qtdFantasia = Genero(fantasia);
+        let qtdRomance = Genero(romance);
+        let qtdBiografia = Genero(biografia);
+        let qtdTerror = Genero(terror);
+        let qtdDrama = Genero(drama);
+        let qtdMusical = Genero(musical);
+
+
+        localStorage.setItem("fantasia", qtdFantasia);
+        localStorage.setItem("romance", qtdRomance);
+        localStorage.setItem("biografia", qtdBiografia);
+        localStorage.setItem("terror", qtdTerror);
+        localStorage.setItem("drama", qtdDrama);
+        localStorage.setItem("musical", qtdMusical);
 
         alert(`você leu ${lidos} de um total de ${total} livros`);
 

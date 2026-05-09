@@ -17,34 +17,56 @@
 
         <div class="header-left">
 
-            
+
             <div class="hello">
-                <div class="logo"><span><img src="./assets/imgs/logo2.png" alt="logo" width="240px" height="100px"></span></div>
+                <div class="logo"><span><img src="./assets/imgs/logo2.png" alt="logo" width="240px"
+                            height="100px"></span></div>
                 <h3>Olá, <span id="b_usuario">usuário</span>!</h3>
             </div>
 
         </div>
 
-   
+
 
         <div class="dash">
 
-             <div class="titulo-grafico">
+
+            <div class="grafico1">
+
+                <div class="titulo-grafico">
                     <p>Andamento de leitura</p>
+                </div>
+
+                <div class="grafico-container">
+                    <canvas id="grafico1"></canvas>
+
+                </div>
+
+
+                <div class="fraseGrafico1">
+
+                    <div id="frase" class="frase"></div>
+
+                </div>
+
             </div>
 
-            <div class="grafico-container">
-                <canvas id="grafico1"></canvas>
+            <div class="grafico2">
+
+                <div class="titulo-grafico2">
+
+                    <p>Porcentagem de gêneros conforme livros lidos</p>
+
+                </div>
+
+                <div class="grafico2-container">
+                    <canvas id="grafico2"></canvas>
+
+                </div>
+
 
             </div>
-            
-            
-            <div class="fraseGrafico1">
-                
-                <div id="frase" class="frase"></div>
-                
-            </div>
-            
+
         </div>
     </div>
 
@@ -57,7 +79,12 @@
     b_usuario.innerHTML = sessionStorage.NOME_USUARIO;
 
 
-    window.onload = graficoLidos;
+    window.onload = function () {
+
+        graficoLidos();
+        graficoGeneros();
+
+    }
 
     function graficoLidos() {
 
@@ -87,14 +114,90 @@
 
         if (naoLidos <= 2) {
             frase.innerHTML = `Você está virando quase uma sósia da Rory Gilmore`;
-        }else if (naoLidos <= 5) {
-             frase.innerHTML = `Continue assim, sua evolução na leitura merece palmas!`;
-            
-        }else if (naoLidos <= 9) {
-             frase.innerHTML = `Você está no caminho certo, o importante não é quantidade, é começar!`;
+        } else if (naoLidos <= 5) {
+            frase.innerHTML = `Continue assim, sua evolução na leitura merece palmas!`;
+
+        } else if (naoLidos <= 9) {
+            frase.innerHTML = `Você está no caminho certo, o importante não é quantidade, é começar!`;
         }
 
         console.log(lidos, total, naoLidos);
+    }
+
+    function graficoGeneros() {
+
+        let fantasia = Number(localStorage.getItem("fantasia"));
+        let romance = Number(localStorage.getItem("romance"));
+        let biografia = Number(localStorage.getItem("biografia"));
+        let terror = Number(localStorage.getItem("terror"));
+        let drama = Number(localStorage.getItem("drama"));
+        let musical = Number(localStorage.getItem("musical"));
+
+
+        //fórmula = (1 / 10) * 100
+
+        let total = Number(localStorage.getItem("totalLivros"));
+
+
+
+
+
+        let dadosGenero = {
+            labels: ["fantasia", "romance", "biografia", "terror", "drama", "musical"],
+            datasets: [{
+                label: "Gêneros lidos",
+                data: [
+                    ((Number(localStorage.getItem("fantasia")) / total) * 100).toFixed(0),
+                    ((Number(localStorage.getItem("romance")) / total) * 100).toFixed(0),
+                    ((Number(localStorage.getItem("biografia")) / total) * 100).toFixed(0),
+                    ((Number(localStorage.getItem("terror")) / total) * 100).toFixed(0),
+                    ((Number(localStorage.getItem("drama")) / total) * 100).toFixed(0),
+                    ((Number(localStorage.getItem("musical")) / total) * 100).toFixed(0),
+                ],
+                minBarLength: 5,
+                backgroundColor: [
+                    "#8da9c4",
+                    "#c084fc",
+                    "#facc15",
+                    "#ef4444",
+                    "#fb923c",
+                    "#34d399"
+                ]
+            }]
+        };
+
+        const config = {
+            type: "bar",
+            data: dadosGenero,
+            options: {
+                indexAxis: 'y',
+                plugins: {
+                    legend: {
+                        display: false
+                    }
+                },
+                scales: {
+                    x: {
+                        display: true,
+                        title: {
+                            display: true,
+                            text: '%'
+                        },
+                        beginAtZero: true,
+                        max: 100
+                    },
+                    y: {
+                        display: true
+                    }
+                }
+            }
+        };
+        
+        let grafico = new Chart(
+            document.getElementById("grafico2"),
+            config
+        );
+
     }
 
 
