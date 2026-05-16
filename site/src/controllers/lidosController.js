@@ -11,7 +11,8 @@ function salvar(req, res) {
         res.status(400).send("Livros undefined!");
     } else {
 
-        lidosModel.limpar(idUsuario)
+        
+        lidosModel.salvarHistorico(idUsuario, lidos)
             .then(function () {
 
                 for (let i = 0; i < livros.length; i++) {
@@ -21,11 +22,12 @@ function salvar(req, res) {
                         livros[i].livro
                     );
 
+
                 }
 
-                return lidosModel.salvarHistorico(idUsuario, lidos);
 
             })
+            console.log()
             .then(function () {
                 res.json("Salvo com sucesso");
             })

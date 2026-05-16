@@ -1,13 +1,8 @@
 var database = require("../database/config");
 
-/*function limpar(idUsuario) {
-    var instrucaoSql = `
-        DELETE FROM LivrosLidos WHERE fk_usuario = ${idUsuario};
-    `;
-    return database.executar(instrucaoSql);
-}*/
 
 function salvar(idUsuario, nome) {
+
     var instrucaoSql = `
         INSERT INTO LivrosLidos (nome, fk_usuario)
         VALUES ('${nome}', ${idUsuario});

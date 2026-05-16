@@ -217,7 +217,9 @@
         localStorage.setItem("drama", qtdDrama);
         localStorage.setItem("musical", qtdMusical);
 
-        alert(`você leu ${lidos} de um total de ${total} livros`);
+        alert(`você leu ${lidos} de um total de ${total} livros, ${livros}`);
+
+        console.log(livros)
 
         fetch("/lidos/salvar", {
             method: "POST",
