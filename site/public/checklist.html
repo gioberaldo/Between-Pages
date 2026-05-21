@@ -124,23 +124,12 @@
 
 </html>
 <script>
-    function Genero(listaGeneros) {
 
-        let contador = 0;
-
-        for (let i = 0; i < listaGeneros.length; i++) {
-            if (listaGeneros[i].checked) {
-                contador ++
-            }
-            
-        }
-        return contador;
-    }
 
 
     function verDash() {
 
-    
+
 
         let checklist = [
             document.getElementById('harry_potter'),
@@ -154,92 +143,113 @@
             document.getElementById('violinista_no_Telhado'),
             document.getElementById('a_nascente')
 
-            
-        ];
-
-        let fantasia = [
-            document.getElementById('harry_potter'),
-            document.getElementById('alice_wonderland'),
-        ];
-
-        let romance = [
-            document.getElementById('o_grande_gatsby'),
-            document.getElementById('anna_karenina'),
-            document.getElementById('orgulho_e_preconceito'),
-            document.getElementById('a_nascente')
 
         ];
 
-        let biografia = [
-            document.getElementById('diario_anne_frank'),
-        ];
-
-        let terror = [
-            document.getElementById('carrie_a_estranha'),
-        ];
-
-        let drama = [
-            document.getElementById('bruxas_de_salem'),
-        ];
-
-        let musical = [
-            document.getElementById('violinista_no_Telhado'),
-        ];
 
         let lidos = 0;
         let livros = [];
+        let generos = [];
 
         for (let i = 0; i < checklist.length; i++) {
 
             if (checklist[i].checked) {
+                
                 lidos++;
 
-                livros.push({
-                    livro: checklist[i].id
-                });
+                let nomeLivro = checklist[i].id;
+                let generoLivro = "";
+
+                if (nomeLivro == "harry_potter" || nomeLivro == "alice_wonderland") {
+
+                    generoLivro = "Fantasia";
+
+                } else if (nomeLivro == "o_grande_gatsby" || nomeLivro == "anna_karenina" || nomeLivro == "orgulho_e_preconceito" || nomeLivro == "a_nascente") {
+
+                    generoLivro = "Romance";
+
+                } else if (nomeLivro == "diario_anne_frank") {
+
+                    generoLivro = "Biografia";
+
+                } else if (nomeLivro == "bruxas_de_salem") {
+
+                    generoLivro = "Drama";
+
+                } else if (nomeLivro == "violinista_no_Telhado") {
+
+                    generoLivro = "Musical";
+
+                } else if (nomeLivro == "carrie_a_estranha") {
+
+                    generoLivro = "Terror";
+
+                }
+
+                livros.push(nomeLivro);
+
+                generos.push(generoLivro);
             }
         }
 
         let total = checklist.length;
 
-        let qtdFantasia = Genero(fantasia);
-        let qtdRomance = Genero(romance);
-        let qtdBiografia = Genero(biografia);
-        let qtdTerror = Genero(terror);
-        let qtdDrama = Genero(drama);
-        let qtdMusical = Genero(musical);
 
 
-        localStorage.setItem("fantasia", qtdFantasia);
-        localStorage.setItem("romance", qtdRomance);
-        localStorage.setItem("biografia", qtdBiografia);
-        localStorage.setItem("terror", qtdTerror);
-        localStorage.setItem("drama", qtdDrama);
-        localStorage.setItem("musical", qtdMusical);
-
-        alert(`você leu ${lidos} de um total de ${total} livros, ${livros}`);
 
         console.log(livros)
 
-        fetch("/lidos/salvar", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                idUsuario: sessionStorage.ID_USUARIO,
-                livros: livros,
-                lidos: lidos
+        fetch(`/lidos/verificarLivros/${sessionStorage.ID_USUARIO}`)
+            .then(function (response) {
+
+                response.json().then(function (resposta) {
+
+                    let livrosJaExistem = [];
+
+                    for (let i = 0; i < resposta.length; i++) {
+
+                        livrosJaExistem.push(resposta[i].nome);
+
+                    }
+
+                    let totalLidos = livrosJaExistem.length;
+
+                    for (let i = 0; i < livros.length; i++) {
+
+                        if (!livrosJaExistem.includes(livros[i])) {
+
+                            totalLidos++;
+
+                            fetch("/lidos/salvar", {
+                                method: "POST",
+                                headers: {
+                                    "Content-Type": "application/json"
+                                },
+                                body: JSON.stringify({
+                                    idUsuario: sessionStorage.ID_USUARIO,
+                                    livros: livros[i],
+                                    generos: generos[i],
+                                    lidos: totalLidos
+                                })
+                            });
+
+                        }
+
+                    }
+
+                });
+
             })
-        });
+            .catch(function (erro) {
 
+                console.log(erro);
 
-        localStorage.setItem("livrosLidos", lidos);
-        localStorage.setItem("totalLivros", total);
+            });
 
-        setTimeout(function () {
+            setTimeout(function () {
             window.location = "./dashboard.html";
         }, 1000);
     }
+
 
 </script>

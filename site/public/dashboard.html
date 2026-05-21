@@ -97,19 +97,41 @@
 
     b_usuario.innerHTML = sessionStorage.NOME_USUARIO;
 
+    let idUsuario = sessionStorage.ID_USUARIO;
+
 
     window.onload = function () {
 
-        graficoLidos();
-        graficoGeneros();
+        puxarHistorico();
+        puxarGenero();
+
 
     }
 
-    function graficoLidos() {
+    function puxarHistorico() {
+
+        
+
+        fetch(`/lidos/puxarHistorico/${idUsuario}`)
+
+            .then(function (response) {
+
+                response.json().then(function (resposta) {
+
+                    plotarGraficoLidos(resposta);
+                    totalLivrosLidos(resposta);
+
+                });
+
+            });
+
+    }
+
+    function plotarGraficoLidos(resposta) {
 
         let frase = document.getElementById("frase");
-        let lidos = Number(localStorage.getItem("livrosLidos"));
-        let total = Number(localStorage.getItem("totalLivros"));
+        let lidos = resposta[0].livros_lidos;
+        let total = 10
         let naoLidos = total - lidos;
 
         let dados = {
@@ -143,78 +165,189 @@
         console.log(lidos, total, naoLidos);
     }
 
-    function graficoGeneros() {
-
-        let fantasia = Number(localStorage.getItem("fantasia"));
-        let romance = Number(localStorage.getItem("romance"));
-        let biografia = Number(localStorage.getItem("biografia"));
-        let terror = Number(localStorage.getItem("terror"));
-        let drama = Number(localStorage.getItem("drama"));
-        let musical = Number(localStorage.getItem("musical"));
+    function puxarGenero() {
 
 
-        //fórmula = (1 / 10) * 100
+        fetch(`/lidos/puxarGenero/${idUsuario}`)
 
-        let total = Number(localStorage.getItem("totalLivros"));
+            .then(function (response) {
 
+                response.json().then(function (resposta) {
+                
+                    plotarGraficoGenero(resposta);
 
-        let dadosGenero = {
-            labels: ["fantasia", "romance", "biografia", "terror", "drama", "musical"],
-            datasets: [{
-                label: "Gêneros lidos",
-                data: [
-                    ((Number(localStorage.getItem("fantasia")) / total) * 100).toFixed(0),
-                    ((Number(localStorage.getItem("romance")) / total) * 100).toFixed(0),
-                    ((Number(localStorage.getItem("biografia")) / total) * 100).toFixed(0),
-                    ((Number(localStorage.getItem("terror")) / total) * 100).toFixed(0),
-                    ((Number(localStorage.getItem("drama")) / total) * 100).toFixed(0),
-                    ((Number(localStorage.getItem("musical")) / total) * 100).toFixed(0),
-                ],
-                minBarLength: 5,
-                backgroundColor: [
-                    "#8da9c4",
-                    "#c084fc",
-                    "#facc15",
-                    "#ef4444",
-                    "#fb923c",
-                    "#34d399"
-                ]
-            }]
-        };
+                });
 
-        const config = {
-            type: "bar",
-            data: dadosGenero,
-            options: {
-                indexAxis: 'y',
-                plugins: {
-                    legend: {
-                        display: false
-                    }
-                },
-                scales: {
-                    x: {
-                        display: true,
-                        title: {
-                            display: true,
-                            text: '%'
-                        },
-                        beginAtZero: true,
-                        max: 100
-                    },
-                    y: {
-                        display: true
-                    }
-                }
-            }
-        };
+            });
+        }
 
-        let grafico = new Chart(
-            document.getElementById("grafico2"),
-            config
-        );
+        function plotarGraficoGenero(resposta) {
+    let generos = [];
+    let quantidade = [];
+
+    for (let i = 0; i < resposta.length; i++) {
+
+        generos.push(resposta[i].genero);
+
+        quantidade.push(resposta[i].quantidade);
 
     }
+
+    let dadosGenero = {
+
+        labels: generos,
+
+        datasets: [{
+            
+            label: "Gêneros lidos",
+
+            data: quantidade,
+
+            backgroundColor: [
+                "#8da9c4",
+                "#c084fc",
+                "#facc15",
+                "#ef4444",
+                "#fb923c",
+                "#34d399"
+            ]
+
+        }]
+    };
+
+    const config = {
+
+        type: "bar",
+
+        data: dadosGenero,
+
+        options: {
+
+            indexAxis: 'y',
+
+            plugins: {
+
+                legend: {
+
+                    display: false
+
+                }
+
+            },
+
+            scales: {
+
+                x: {
+
+                    beginAtZero: true
+
+                }
+
+            }
+
+        }
+
+    };
+
+    let grafico = new Chart(
+
+        document.getElementById("grafico2"),
+
+        config
+
+    );
+
+}
+            
+
+        
+
+        function totalLivrosLidos(resposta){
+
+
+
+        }
+
+    
+
+
+
+
+
+   
+
+    // function graficoGeneros() {
+
+    //     let fantasia = Number(localStorage.getItem("fantasia"));
+    //     let romance = Number(localStorage.getItem("romance"));
+    //     let biografia = Number(localStorage.getItem("biografia"));
+    //     let terror = Number(localStorage.getItem("terror"));
+    //     let drama = Number(localStorage.getItem("drama"));
+    //     let musical = Number(localStorage.getItem("musical"));
+
+
+    //     //fórmula = (1 / 10) * 100
+
+    //     let total = Number(localStorage.getItem("totalLivros"));
+
+
+    //     let dadosGenero = {
+    //         labels: ["fantasia", "romance", "biografia", "terror", "drama", "musical"],
+    //         datasets: [{
+    //             label: "Gêneros lidos",
+    //             data: [
+    //                 ((Number(localStorage.getItem("fantasia")) / total) * 100).toFixed(0),
+    //                 ((Number(localStorage.getItem("romance")) / total) * 100).toFixed(0),
+    //                 ((Number(localStorage.getItem("biografia")) / total) * 100).toFixed(0),
+    //                 ((Number(localStorage.getItem("terror")) / total) * 100).toFixed(0),
+    //                 ((Number(localStorage.getItem("drama")) / total) * 100).toFixed(0),
+    //                 ((Number(localStorage.getItem("musical")) / total) * 100).toFixed(0),
+    //             ],
+    //             minBarLength: 5,
+    //             backgroundColor: [
+    //                 "#8da9c4",
+    //                 "#c084fc",
+    //                 "#facc15",
+    //                 "#ef4444",
+    //                 "#fb923c",
+    //                 "#34d399"
+    //             ]
+    //         }]
+    //     };
+
+    //     const config = {
+    //         type: "bar",
+    //         data: dadosGenero,
+    //         options: {
+    //             indexAxis: 'y',
+    //             plugins: {
+    //                 legend: {
+    //                     display: false
+    //                 }
+    //             },
+    //             scales: {
+    //                 x: {
+    //                     display: true,
+    //                     title: {
+    //                         display: true,
+    //                         text: '%'
+    //                     },
+    //                     beginAtZero: true,
+    //                     max: 100
+    //                 },
+    //                 y: {
+    //                     display: true
+    //                 }
+    //             }
+    //         }
+    //     };
+
+    //     let grafico = new Chart(
+    //         document.getElementById("grafico2"),
+    //         config
+    //     );
+
+    // }
 
 
 </script>
