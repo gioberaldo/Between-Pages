@@ -37,7 +37,7 @@
 
                 <div class="metrica1">
 
-                    <p>teste</p>
+                    <p id="kpiGenero"></p>
 
                 </div>
 
@@ -122,7 +122,7 @@
                 response.json().then(function (resposta) {
 
                     plotarGraficoLidos(resposta);
-                    totalLivrosLidos(resposta);
+                    // totalLivrosLidos(resposta);
 
                 });
 
@@ -178,6 +178,7 @@
                 response.json().then(function (resposta) {
                 
                     plotarGraficoGenero(resposta);
+                    generoMaisLido(resposta);
 
                 });
 
@@ -331,6 +332,24 @@
 
         // }
 
+        function generoMaisLido(resposta) {
+
+            let generoMaior = resposta[0];
+
+            for (let i = 0; i < resposta.length; i++) {
+               
+                if (resposta[i].quantidade > generoMaior.quantidade) {
+                     generoMaior = resposta[i]; 
+
+                    }
+                 } 
+                document.getElementById("kpiGenero").innerHTML = `Gênero mais lido: <br><br><span>${generoMaior.genero}</span>` ;
+                
+            }
+
+            
+        
+
     
 
 
@@ -354,61 +373,61 @@
     //     let total = Number(localStorage.getItem("totalLivros"));
 
 
-        let dadosGenero = {
-            labels: ["fantasia", "romance", "biografia", "terror", "drama", "musical"],
-            datasets: [{
-                label: "Gêneros lidos",
-                data: [
-                    ((Number(localStorage.getItem("fantasia")) / total) * 100).toFixed(0),
-                    ((Number(localStorage.getItem("romance")) / total) * 100).toFixed(0),
-                    ((Number(localStorage.getItem("biografia")) / total) * 100).toFixed(0),
-                    ((Number(localStorage.getItem("terror")) / total) * 100).toFixed(0),
-                    ((Number(localStorage.getItem("drama")) / total) * 100).toFixed(0),
-                    ((Number(localStorage.getItem("musical")) / total) * 100).toFixed(0),
-                ],
-                minBarLength: 5,
-                backgroundColor: [
-                    "#8da9c4",
-                    "#c084fc",
-                    "#facc15",
-                    "#ef4444",
-                    "#fb923c",
-                    "#34d399"
-                ]
-            }]
-        };
+        // let dadosGenero = {
+        //     labels: ["fantasia", "romance", "biografia", "terror", "drama", "musical"],
+        //     datasets: [{
+        //         label: "Gêneros lidos",
+        //         data: [
+        //             ((Number(localStorage.getItem("fantasia")) / total) * 100).toFixed(0),
+        //             ((Number(localStorage.getItem("romance")) / total) * 100).toFixed(0),
+        //             ((Number(localStorage.getItem("biografia")) / total) * 100).toFixed(0),
+        //             ((Number(localStorage.getItem("terror")) / total) * 100).toFixed(0),
+        //             ((Number(localStorage.getItem("drama")) / total) * 100).toFixed(0),
+        //             ((Number(localStorage.getItem("musical")) / total) * 100).toFixed(0),
+        //         ],
+        //         minBarLength: 5,
+        //         backgroundColor: [
+        //             "#8da9c4",
+        //             "#c084fc",
+        //             "#facc15",
+        //             "#ef4444",
+        //             "#fb923c",
+        //             "#34d399"
+        //         ]
+        //     }]
+        // };
 
-        const config = {
-            type: "bar",
-            data: dadosGenero,
-            options: {
-                indexAxis: 'y',
-                plugins: {
-                    legend: {
-                        display: false
-                    }
-                },
-                scales: {
-                    x: {
-                        display: true,
-                        title: {
-                            display: true,
-                            text: '%'
-                        },
-                        beginAtZero: true,
-                        max: 100
-                    },
-                    y: {
-                        display: true
-                    }
-                }
-            }
-        };
+        // const config = {
+        //     type: "bar",
+        //     data: dadosGenero,
+        //     options: {
+        //         indexAxis: 'y',
+        //         plugins: {
+        //             legend: {
+        //                 display: false
+        //             }
+        //         },
+        //         scales: {
+        //             x: {
+        //                 display: true,
+        //                 title: {
+        //                     display: true,
+        //                     text: '%'
+        //                 },
+        //                 beginAtZero: true,
+        //                 max: 100
+        //             },
+        //             y: {
+        //                 display: true
+        //             }
+        //         }
+        //     }
+        // };
 
-        let grafico = new Chart(
-            document.getElementById("grafico2"),
-            config
-        );
+        // let grafico = new Chart(
+        //     document.getElementById("grafico2"),
+        //     config
+        // );
 
     //     let dadosGenero = {
 
