@@ -609,6 +609,15 @@ input {
 
 
 
+.img-ods {
+  display: flex;
+  margin-top: 20px;
+  margin-left: 110%;
+  width: 10%;
+}
+
+
+
 /* ALERTA */
 
 #alerta {
