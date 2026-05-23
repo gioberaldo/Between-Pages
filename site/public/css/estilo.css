@@ -156,15 +156,17 @@ body {
 
 .social1 {
 
-  background-image: url(../assets/imgs/background-video.png);
-  background-size: cover;
-  padding: 100px;
+  padding: 80px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #ecdcc6;
 
 }
 
 .bloco2 {
     display: flex;
-    padding: 60px;
+    padding: 10px;
     background-color: #647ea0;
 
 }
@@ -172,47 +174,51 @@ body {
 
 
 .social2 {
- background-image: url(../assets/imgs/background-video.png);
-  background-size: cover;
-  padding: 100px;
+  padding: 80px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #ecdcc6;
 
 }
 
 .bloco3 {
     display: flex;
-    padding: 60px;
+    padding: 10px;
     background-color: #647ea0;
 
 }
 
 .social3 {
+  padding: 80px 0;
   display: flex;
   justify-content: center;
-  background-image: url(../assets/imgs/background-video.png);
-  background-size: cover;
-
-  padding: 100px;
+  align-items: center;
+  background-color: #ecdcc6;
 
 }
 
 .bloco4 {
     display: flex;
-    padding: 60px;
+    padding: 10px;
     background-color: #647ea0;
 
 }
 
 .social4 {
   display: flex;
-  justify-content: center;
-  background-image: url(../assets/imgs/background.png);
-  background-size: cover;
-  padding: 60px;
+
+    justify-content: center;
+
+    align-items: center;
+
+    background-color: #6f89ad;
+
+    padding: 80px 0;
 
 }
 
 video {
-
   width: 600px;
   display: block;
   margin-left: 200px;
@@ -222,7 +228,7 @@ video {
 
 
 h4 {
- font-family:'Courier New', Courier, monospace;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
   color: white;
   font-size: 20px;
   text-align: center;
@@ -255,10 +261,13 @@ h4 {
 
 .box1 h4{
   background-color:  #737373;
-  width: 400px;
-  height: 200px;
-  border-radius: 20px;
-  
+  width: 500px;
+  height: 300px;
+  border-radius: 30px;
+  box-shadow:
+  0 10px 30px rgba(0,0,0,0.18);
+  transition: 0.3s;
+  font-size: 25px;
 }
 
 .box2 {
@@ -271,11 +280,17 @@ h4 {
 
 .box2 h4{
   background-color:  #737373;
-  width: 400px;
-  height: 200px;
-  border-radius: 20px;
+  width: 700px;
+  height: 300px;
+  border: solid #737373 10px;
+  border-radius: 30px;
+  box-shadow:
+  0 10px 30px rgba(0,0,0,0.18);
+  transition: 0.3s;
+  font-size: 25px;
 
 }
+
 
 .box3 {
   display: flex;
@@ -287,12 +302,18 @@ h4 {
 
 .box3 h4{
   background-color:  #737373;
-  width: 600px;
+  width: 800px;
   height: 300px;
   border-radius: 30px;
-
+  border: solid #737373 10px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.18);
+  transition: 0.3s;
+  font-size: 25px;
 
 }
+
+
+
 
 .box4 {
   display: flex;
@@ -302,14 +323,22 @@ h4 {
 
 .box4 h4{
   background-color:  #737373;
-  width: 600px;
-  height: 300px;
+  width: 900px;
+  height: 400px;
+  border: solid #737373 10px;
   border-radius: 30px;
-  display: block;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.18);
+  transition: 0.3s;
+  font-size: 25px;
+  margin-left: 30px;
 
 }
 
+
+
 .box4 img {
+  width: 25%;
+  border-radius: 25px;
   display: flex;
   margin-right: 100px;
   margin-top: 10px;
@@ -320,11 +349,6 @@ h4 {
   display: inline;
 }
 
-.button {
-  color: #647ea0;
-  font-weight: bold;
- 
-}
 
 
 /* FOOTER */

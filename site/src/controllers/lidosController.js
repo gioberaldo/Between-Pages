@@ -120,6 +120,16 @@ function puxarGenero(req, res) {
     })
 }
 
+function puxarPaginas(req, res) {
+    var idUsuario = req.params.idUsuario;
+
+    lidosModel.puxarPaginas(idUsuario).then(function(resultado) {
+
+            res.json(resultado);
+
+        });
+}
+
 
 
 module.exports = {
@@ -127,4 +137,5 @@ module.exports = {
     verificarLivros,
     puxarHistorico,
     puxarGenero,
+    puxarPaginas,
 };

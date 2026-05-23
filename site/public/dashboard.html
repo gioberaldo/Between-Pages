@@ -19,13 +19,12 @@
 
 
             <div class="hello">
-                <div class="logo"><span><img src="./assets/imgs/logo2.png" alt="logo" width="240px"
-                            height="100px"></span></div>
+                <div class="logo"><span><img src="./assets/imgs/logo2.png" alt="logo" width="240px" height="100px"></span></div>
 
                 <h3>Olá, <span id="b_usuario">usuário</span>!</h3>
                 <h1>Bem vindo(a) a sua <br><span style="color: #647ea0">Dashboard</span>!</h1>
-                <a class="link-checklist"  href="checklist.html">Adicionar livros</a><br>
-                <a class="link-home" href="checklist.html"><img src="./assets/imgs/icon-home.png" alt="" width="30px" height="30px"></a>
+                <a class="link-checklist"  href="checklist.html">Adicionar + livros</a><br>
+                <a class="link-home" href="index.html"><img src="./assets/imgs/icon-home.png" alt="" width="30px" height="30px"></a>
         </li>
             </div>
 
@@ -36,14 +35,14 @@
             <div class="kpis">
 
                 <div class="metrica1">
-
+                    <img class="icon-genero" src="./assets/imgs/icon-favorito.png" alt="Icon icon-favorito" width="20%" height="70%">
                     <p id="kpiGenero"></p>
 
                 </div>
 
                 <div class="metrica2">
-
-                    <p>teste</p>
+                    <img class="icon-pagina" src="./assets/imgs/icon-bandeira.png" alt="icon-bandeira" width="20%" height="70%">
+                    <p id="kpiPaginas"></p>
 
                 </div>
 
@@ -60,13 +59,6 @@
 
                     <div class="grafico-container">
                         <canvas id="grafico1"></canvas>
-
-                    </div>
-
-
-                    <div class="fraseGrafico1">
-
-                        <div id="frase" class="frase"></div>
 
                     </div>
 
@@ -89,6 +81,13 @@
                 </div>
 
             </div>
+
+                <div class="fraseGraficos">
+
+                        <div id="frase" class="frase"></div>
+
+                </div>
+
         </div>
     </div>
 
@@ -107,6 +106,7 @@
 
         puxarHistorico();
         puxarGenero();
+        totalPaginasLidas();
 
 
     }
@@ -142,7 +142,7 @@
             datasets: [{
                 label: "Status de leitura",
                 data: [lidos, naoLidos],
-                backgroundColor: ["#647ea0", "#737373"]
+                backgroundColor: ["#90CF8E", "#737373"]
             }]
         };
 
@@ -251,8 +251,8 @@
             minBarLength: 5,
 
             backgroundColor: [
-                "#8da9c4",
-                "#c084fc",
+                "blue",
+                "pink",
                 "#facc15",
                 "#ef4444",
                 "#fb923c",
@@ -343,8 +343,37 @@
 
                     }
                  } 
-                document.getElementById("kpiGenero").innerHTML = `Gênero mais lido: <br><br><span>${generoMaior.genero}</span>` ;
+
+                kpiGenero.innerHTML = `Gênero mais lido: <br><br><span>${generoMaior.genero}</span>` ;
                 
+            }
+
+
+            function totalPaginasLidas(resposta) {
+
+                fetch(`/lidos/puxarPaginas/${idUsuario}`)
+
+                .then(function(response) {
+
+            response.json().then(function(resposta) {
+
+                let totalPaginas = 0;
+
+                for (let i = 0; i < resposta.length; i++) {
+
+                    totalPaginas += resposta[i].qtdPaginas;
+
+                }
+
+                kpiPaginas.innerHTML = `Total de páginas lidas:<br><br><span>${totalPaginas}</span>`;
+
+            });
+
+        });
+
+
+
+
             }
 
             

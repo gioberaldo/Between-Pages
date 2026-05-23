@@ -19,4 +19,8 @@ router.get("/puxarGenero/:idUsuario", function(req, res) {
     lidosController.puxarGenero(req, res);
 });
 
+router.get("/puxarPaginas/:idUsuario", function(req, res) {
+    lidosController.puxarPaginas(req, res);
+});
+
 module.exports = router;
