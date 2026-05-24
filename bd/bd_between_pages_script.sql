@@ -1,9 +1,8 @@
 CREATE DATABASE bd_between_pages;
 USE bd_between_pages;
 
--- mudar para usuario
 
-CREATE TABLE Cadastro (
+CREATE TABLE Usuarios (
 id INT PRIMARY KEY AUTO_INCREMENT,
 nome VARCHAR(45),
 email VARCHAR(45),
@@ -18,54 +17,25 @@ genero VARCHAR(45),
 fk_usuario INT,
 CONSTRAINT chFkUsuario
 FOREIGN KEY (fk_usuario) 
-REFERENCES Cadastro (id)
-);
-
-CREATE TABLE HistoricoLeitura(
-    id INT PRIMARY KEY AUTO_INCREMENT,
-    fk_usuario INT,
-    livros_lidos INT,
-    dtHrRegistro DATETIME DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (fk_usuario) REFERENCES Cadastro(id)
+REFERENCES Usuarios (id)
 );
 
 
-
-
-SELECT * FROM Cadastro;
-
-
+SELECT * FROM Usuarios;
 
 SELECT * FROM LivrosLidos;
 
-SELECT * FROM HistoricoLeitura;
-
-
-SELECT nome, email, cpf, senha FROM Cadastro;
+SELECT nome, email, cpf, senha FROM Usuarios;
 
 SELECT nome, fk_usuario FROM LivrosLidos;
 
 
-SELECT livros_lidos
-        FROM HistoricoLeitura
-        ORDER BY idHistorico DESC
-        LIMIT 1;
-
-SELECT Cadastro.nome AS 'usuario',
+SELECT Usuarios.nome AS 'usuario',
 LivrosLidos.nome AS 'livro lido'
 FROM LivrosLidos
-JOIN Cadastro
-ON LivrosLidos.fk_usuario = Cadastro.id;
+JOIN Usuarios
+ON LivrosLidos.fk_usuario = Usuarios.id;
 
-SELECT 
-    c.nome AS usuario,
-    l.nome AS livro_lido,
-    h.livros_lidos
-FROM Cadastro c
-JOIN LivrosLidos l 
-    ON l.fk_usuario = c.id
-JOIN HistoricoLeitura h 
-    ON h.fk_usuario = c.id;
     
     SELECT
 	
@@ -86,21 +56,13 @@ JOIN HistoricoLeitura h
     COUNT(*) AS quantidade
 
 FROM LivrosLidos
-
 WHERE fk_usuario = 1
-
 GROUP BY genero;
-
-
-
-ALTER TABLE historicoLeitura ADD COLUMN dtHrRegistro DATETIME DEFAULT CURRENT_TIMESTAMP;
-
     
-   
+ALTER TABLE livrosLidos ADD COLUMN genero VARCHAR(45);
     
-    ALTER TABLE livrosLidos ADD COLUMN genero VARCHAR(45);
-    
-    DESCRIBE LivrosLidos;
+DESCRIBE LivrosLidos;
+
 SELECT
 nome,
 CASE
@@ -116,4 +78,4 @@ CASE
 END AS qtdPaginas
 FROM LivrosLidos;
 
-DROP DATABASE bd_between_pages;
+DROP DATABASE IF EXISTS bd_between_pages;
