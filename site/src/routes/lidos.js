@@ -11,8 +11,8 @@ router.get("/verificarLivros/:idUsuario", function(req, res) {
     lidosController.verificarLivros(req, res);
 });
 
-router.get("/puxarHistorico/:idUsuario", function(req, res) {
-    lidosController.puxarHistorico(req, res);
+router.get("/puxarTotalLivrosLidos/:idUsuario", function(req, res) {
+    lidosController.puxarTotalLivrosLidos(req, res);
 });
 
 router.get("/puxarGenero/:idUsuario", function(req, res) {

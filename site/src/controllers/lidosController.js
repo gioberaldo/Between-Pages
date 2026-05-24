@@ -5,7 +5,6 @@ function salvar(req, res) {
     var idUsuario = req.body.idUsuario;
     var livros = req.body.livros;
     var generos = req.body.generos;
-    var lidos = req.body.lidos;
 
     if (idUsuario == undefined) {
 
@@ -17,41 +16,31 @@ function salvar(req, res) {
 
     } else {
 
-                lidosModel.salvar(
+        lidosModel.salvar(
 
-                            idUsuario,
-                            livros,
-                            generos
-                        
-                        )
+            idUsuario,
+            livros,
+            generos
 
-                        .then(function () {
+        )
 
-                return lidosModel.salvarHistorico(
-                    idUsuario,
-                    lidos
-                );
+        .then(function () {
 
-            })
+            res.json("Salvo com sucesso");
 
-            .then(function () {
+        })
 
-                res.json("Salvo com sucesso");
+        .catch(function (erro) {
 
-            })
+            console.log(erro);
 
-            .catch(function (erro) {
+            res.status(500).json(erro.sqlMessage);
 
-                console.log(erro);
-
-                res.status(500).json(erro.sqlMessage);
-
-            });
+        });
 
     }
 
 }
-
 // function salvar(req, res) {
 //     var idUsuario = req.body.idUsuario;
 //     var livros = req.body.livros;
@@ -100,10 +89,10 @@ function verificarLivros(req, res) {
 
 
 
-function puxarHistorico(req, res) {
+function puxarTotalLivrosLidos(req, res) {
     var idUsuario = req.params.idUsuario;
 
-    lidosModel.puxarHistorico(idUsuario).then(function (resultado) {
+    lidosModel.puxarTotalLivrosLidos(idUsuario).then(function (resultado) {
 
         res.json(resultado);
 
@@ -135,7 +124,7 @@ function puxarPaginas(req, res) {
 module.exports = {
     salvar,
     verificarLivros,
-    puxarHistorico,
+    puxarTotalLivrosLidos,
     puxarGenero,
     puxarPaginas,
 };

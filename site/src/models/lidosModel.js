@@ -21,20 +21,12 @@ function salvar(idUsuario, nome, genero) {
     return database.executar(instrucaoSql);
 }
 
-function salvarHistorico(idUsuario, lidos) {
-    var instrucaoSql = `
-        INSERT INTO HistoricoLeitura (fk_usuario, livros_lidos)
-        VALUES (${idUsuario}, ${lidos});
-    `;
-    return database.executar(instrucaoSql);
-}
 
-function puxarHistorico(idUsuario) {
-    var instrucaoSql = `SELECT livros_lidos
-    FROM historicoLeitura
-    WHERE fk_usuario = ${idUsuario}
-    ORDER BY id DESC
-    LIMIT 1;
+function puxarTotalLivrosLidos(idUsuario) {
+    var instrucaoSql = `
+    SELECT COUNT(*) AS livros_lidos
+    FROM LivrosLidos
+    WHERE fk_usuario = ${idUsuario};
     `;
     return database.executar(instrucaoSql);
 }
@@ -80,8 +72,7 @@ WHERE fk_usuario = ${idUsuario};
 module.exports = {
 
     salvar,
-    salvarHistorico,
-    puxarHistorico,
+    puxarTotalLivrosLidos,
     verificarLivros,
     puxarGenero,
     puxarPaginas,

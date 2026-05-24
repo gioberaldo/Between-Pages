@@ -104,25 +104,24 @@
 
     window.onload = function () {
 
-        puxarHistorico();
+        puxarTotalLivrosLidos();
         puxarGenero();
         totalPaginasLidas();
 
 
     }
 
-    function puxarHistorico() {
+    function puxarTotalLivrosLidos() {
 
         
 
-        fetch(`/lidos/puxarHistorico/${idUsuario}`)
+        fetch(`/lidos/puxarTotalLivrosLidos/${idUsuario}`)
 
             .then(function (response) {
 
                 response.json().then(function (resposta) {
 
                     plotarGraficoLidos(resposta);
-                    // totalLivrosLidos(resposta);
 
                 });
 
@@ -324,13 +323,6 @@
 
 }
 
-        
-
-        // function totalLivrosLidos(resposta){
-
-
-
-        // }
 
         function generoMaisLido(resposta) {
 

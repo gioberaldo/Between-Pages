@@ -92,7 +92,7 @@
             <div class="livro9">
 
                 <label>
-                    <input type="checkbox" id="violinista_no_Telhado"> Um Violinista no Telhado – Joseph Stein
+                    <input type="checkbox" id="violinista_no_telhado"> Um Violinista no Telhado – Joseph Stein
                 </label>
                 <br><br>
 
@@ -140,22 +140,19 @@
             document.getElementById('anna_karenina'),
             document.getElementById('diario_anne_frank'),
             document.getElementById('orgulho_e_preconceito'),
-            document.getElementById('violinista_no_Telhado'),
+            document.getElementById('violinista_no_telhado'),
             document.getElementById('a_nascente')
 
 
         ];
 
 
-        let lidos = 0;
         let livros = [];
         let generos = [];
 
         for (let i = 0; i < checklist.length; i++) {
 
             if (checklist[i].checked) {
-                
-                lidos++;
 
                 let nomeLivro = checklist[i].id;
                 let generoLivro = "";
@@ -176,7 +173,7 @@
 
                     generoLivro = "Drama";
 
-                } else if (nomeLivro == "violinista_no_Telhado") {
+                } else if (nomeLivro == "violinista_no_telhado") {
 
                     generoLivro = "Musical";
 
@@ -191,8 +188,6 @@
                 generos.push(generoLivro);
             }
         }
-
-        let total = checklist.length;
 
 
 
@@ -212,13 +207,10 @@
 
                     }
 
-                    let totalLidos = livrosJaExistem.length;
 
                     for (let i = 0; i < livros.length; i++) {
 
-                        if (!livrosJaExistem.includes(livros[i])) {
-
-                            totalLidos++;
+                        if (!livrosJaExistem.includes(livros[i])){
 
                             fetch("/lidos/salvar", {
                                 method: "POST",
@@ -229,7 +221,6 @@
                                     idUsuario: sessionStorage.ID_USUARIO,
                                     livros: livros[i],
                                     generos: generos[i],
-                                    lidos: totalLidos
                                 })
                             });
 
