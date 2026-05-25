@@ -194,6 +194,7 @@
     let terror = 0;
     let drama = 0;
     let musical = 0;
+    
 
     
     for (let i = 0; i < resposta.length; i++) {
@@ -238,7 +239,7 @@
 
             data: [
 
-                ((fantasia / total) * 100).toFixed(0),
+                ((fantasia / total) * 10).toFixed(0),
                 ((romance / total) * 100).toFixed(0),
                 ((biografia / total) * 100).toFixed(0),
                 ((terror / total) * 100).toFixed(0),
@@ -268,49 +269,27 @@
         data: dadosGenero,
 
         options: {
-
             indexAxis: 'y',
-
             plugins: {
-
                 legend: {
-
                     display: false
-
                 }
-
             },
-
             scales: {
-
                 x: {
-
                     display: true,
-
                     title: {
-
                         display: true,
-
                         text: '%'
-
                     },
-
                     beginAtZero: true,
-
                     max: 100
-
                 },
-
                 y: {
-
                     display: true
-
                 }
-
             }
-
         }
-
     };
 
     let grafico = new Chart(
