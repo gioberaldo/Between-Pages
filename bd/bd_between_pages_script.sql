@@ -59,7 +59,7 @@ FROM LivrosLidos
 WHERE fk_usuario = 1
 GROUP BY genero;
     
-ALTER TABLE livrosLidos ADD COLUMN genero VARCHAR(45);
+
     
 DESCRIBE LivrosLidos;
 
